@@ -2,20 +2,20 @@ require "tmpdir"
 require "language_pack"
 require "language_pack/base"
 
-# base JSNES Language Pack. This is for any base ruby app.
-class LanguagePack::JSNES < LanguagePack::Base
+# base JSSPECCY2 Language Pack. This is for any base ruby app.
+class LanguagePack::JSSPECCY2 < LanguagePack::Base
   BUNDLER_VERSION     = "1.1.rc"
   BUNDLER_GEM_PATH    = "bundler-#{BUNDLER_VERSION}"
-  JSNES_GIT_URL       = "https://github.com/hone/jsnes.git"
+  JSSPECCY2_GIT_URL       = "https://github.com/metadaddy-sfdc/jsspeccy2.git"
 
-  # detects if this is a valid JSNES app
+  # detects if this is a valid JSSPECCY2 app
   # @return [Boolean] always true
   def self.use?
     true
   end
 
   def name
-    "JSNES"
+    "JSSPECCY2"
   end
 
   def default_addons
@@ -42,7 +42,7 @@ class LanguagePack::JSNES < LanguagePack::Base
     setup_language_pack_environment
     install_ruby
     allow_git do
-      setup_jsnes
+      setup_jsspeccy2
       install_language_pack_gems
       build_bundler
       install_binaries
@@ -226,11 +226,11 @@ ERROR
     ENV["GIT_DIR"] = git_dir
   end
 
-  # clones the jsnes git repo and copies the roms into the right directory
-  def setup_jsnes
-    Dir.mktmpdir("jsnes-") do |tmpdir|
+  # clones the jssppeccy2 git repo and copies the roms into the right directory
+  def setup_jsspeccy2
+    Dir.mktmpdir("jsspeccy2-") do |tmpdir|
       Dir.chdir(tmpdir) do
-        run("git clone #{JSNES_GIT_URL} .")
+        run("git clone #{JSSPECCY2_GIT_URL} .")
         FileUtils.mkdir_p("local-roms")
         run("mv #{build_path}/* local-roms/") # copy roms
         run("mv * #{build_path}")
@@ -246,8 +246,8 @@ ERROR
 
   # generates the index.html
   def generate_index_html
-    local_roms = Dir['local-roms/*.nes'].map do |rom|
-      name = rom.sub(/\.nes$/, '').sub(%r{^local-roms/}, '')
+    local_roms = Dir['local-roms/*.sna'].map do |rom|
+      name = rom.sub(/\.sna$/, '').sub(%r{^local-roms/}, '')
       "{\"name\": \"#{name}\", \"file\":\"#{rom}\"}"
     end.join(",\n")
     local_roms = '[' + local_roms + ']'

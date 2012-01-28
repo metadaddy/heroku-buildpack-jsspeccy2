@@ -1,25 +1,27 @@
-Heroku buildpack: NES
-======================
+Heroku buildpack: ZX Spectrum
+=============================
 
-This is a [Heroku buildpack](http://devcenter.heroku.com/articles/buildpack) for NES roms. It uses [jsnes](https://github.com/bfirsh/jsnes) to run any NES roms that are pushed to a heroku application.
+This is a [Heroku buildpack](http://devcenter.heroku.com/articles/buildpack) for ZX Spectrum roms. It uses [jsspeccy2](https://github.com/gasman/jsspeccy2) to run 48k ZX Spectrum roms that are pushed to a heroku application.
+
+This buildpack is closely based on the [NES buildpack](https://github.com/hone/heroku-buildpack-jsnes) by [Terence Lee](https://twitter.com/hone02).
 
 Usage
 -----
 
-### NES
+### ZX Spectrum
 
 Example Usage:
 
     $ ls
-    game.nes
+    game.sna
 
-    $ heroku create --stack cedar --buildpack http://github.com/hone/heroku-buildpack-jsnes.git
+    $ heroku create --stack cedar --buildpack http://github.com/metadaddy-sfdc/heroku-buildpack-jsspeccy2.git
 
     $ git push heroku master
     ...
     -----> Heroku receiving push
     -----> Fetching custom buildpack
-    -----> NES game detected
+    -----> ZX Spectrum game detected
     -----> Installing dependencies using Bundler version 1.1.rc
            Running: bundle install --without development:test --path vendor/bundle --deployment
            Fetching gem metadata from http://rubygems.org/..
@@ -30,5 +32,5 @@ Example Usage:
     -----> Discovering process types
            Procfile declares types -> (none)
 
-The buildpack will detect your app as NES if it has a `*.nes` file in the root directory. 
+The buildpack will detect your app as ZX Spectrum if it has a `*.sna` file in the root directory. 
 

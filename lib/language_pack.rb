@@ -9,7 +9,7 @@ module LanguagePack
   def self.detect(*args)
     Dir.chdir(args.first)
 
-    pack = [ JSNES ].detect do |klass|
+    pack = [ JSSPECCY2 ].detect do |klass|
       klass.use?
     end
 
@@ -18,5 +18,5 @@ module LanguagePack
 
 end
 
-require "language_pack/jsnes"
+require "language_pack/jsspeccy2"
 
