@@ -230,9 +230,9 @@ ERROR
   def setup_jsspeccy2
     Dir.mktmpdir("jsspeccy2-") do |tmpdir|
       Dir.chdir(tmpdir) do
-        run("apt-get install coffeescript")
+        pipe("apt-get install coffeescript")
         run("git clone #{JSSPECCY2_GIT_URL} .")
-        run("make")
+        pipe("make")
         FileUtils.mkdir_p("local-roms")
         run("mv #{build_path}/* local-roms/") # copy roms
         run("mv * #{build_path}")
